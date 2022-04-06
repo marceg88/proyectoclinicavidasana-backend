@@ -30,6 +30,7 @@ const generateCardToken = async (req, res, next) => {
     return next(errors)
   }
   const { number, expYear, month, cvc, userId } = req.body
+  console.log("card",req.body)
   const card = {
     "card[number]": number,
     "card[exp_year]": expYear,
@@ -38,6 +39,7 @@ const generateCardToken = async (req, res, next) => {
   }
   try {
     const cardToken = await registerCard(card)
+    console.log("cardToken",cardToken)
     await UsuariosServicios.addCard(userId, cardToken)
     if(req.body.userPaymentId){
       const cardData = { token_card: cardToken.id, user_id: req.body.userPaymentId }
@@ -107,9 +109,9 @@ const makePayment = async (req, res, next) => {
     const user = defineUser({ cardToken, name, lastName, email })
     const userToken = await registerUser(user)
     await UsuariosServicios.addUserPaymentId(userId, userToken)
-    payment.user_id = userToken
+    payment.customer_id = userToken
   } else {
-    payment.user_id = req.body.userPaymentId
+    payment.customer_id = req.body.userPaymentId
   }
   try {
     const paymentRegistered = await registerPayment(payment)
@@ -152,5 +154,4 @@ const deleteCardToken = async (req, res, next) => {
     })
   } 
 }
-
 module.exports = { generateCardToken, generateUserToken, makePayment, deleteCardToken }

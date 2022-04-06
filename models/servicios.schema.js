@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const ServicioSchema = new Schema({
     nameService: {type: String, required: true},
     dateService: { type: Number, required: true },
-    price: { type: Number },
+    price: { type: Number, required: true },
     patient: { type: Schema.Types.ObjectId, ref: 'Usuario', required: true}
 });
 

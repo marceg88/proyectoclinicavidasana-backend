@@ -31,6 +31,7 @@ const ServiciosUsuarios = {
   async findServiceById(id){
     try {
       const servicio = await Servicio.findById(id)
+      console.log(servicio)
       return servicio
     } catch (error) {
       return error
@@ -47,6 +48,7 @@ const ServiciosUsuarios = {
   async editServiceById(id, service) {
     try {
       const currentService = await Servicio.findById(id)
+      console.log("current", currentService)
       if(service.nameService !== "") currentService.nameService = service.nameService
       if(service.dateService !== "") currentService.dateService = service.dateService
       if(service.price !== "") currentService.price = service.price

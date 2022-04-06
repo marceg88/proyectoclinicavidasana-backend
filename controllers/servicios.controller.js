@@ -60,26 +60,29 @@ const findServiceByPatient = async (req, res, next) => {
 
 const editServices = async (req, res, next) => {
   const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-      next(errors)
-  } else {
+  console.log(errors)
+  // if (!errors.isEmpty()) {
+  //     next(errors)
+  // } else {
     const { serviceId } = req.params
     const { nameService, dateService, price } = req.body
+    console.log(req.body)
     try {
-      const serviceUpdated = await ServiciosUsuarios.editService(serviceId, { nameService, dateService, price })
+      const serviceUpdated = await ServiciosUsuarios.editServiceById(serviceId, { nameService, dateService, price })
+      console.log("edit",serviceUpdated)
       res.status(201).json({
         message: "El servicio se actualizo con exito",
         status: "OK",
         data: serviceUpdated
       })
     } catch (error) {
-      res.status.json({
+      res.status(400).json({
         message: "El servicio no pudo ser actualizado",
         status: "Failed",
         data: error
       })
     }
-  }
+  // }
 }
 
 const deleteService = async (req, res, next) => {

@@ -2,17 +2,15 @@ const jwt = require("jsonwebtoken")
 
 const secret = process.env.JWT_SECRET
 
-console.log(secret)
-
 const ingresarUsuario = async (req ,res ,next) =>{
-    console.log(req.user)
+    console.log("req",req.user)
     if(req.user){
       const payload = {
         sub: req.user._id,
         email: req.user.email
       }
       const token = jwt.sign(payload, secret)
-      console.log(token)
+      console.log("token", token)
       res.status(201).json({
         message: "El usuario ingreso con exito",
         status: "OK",

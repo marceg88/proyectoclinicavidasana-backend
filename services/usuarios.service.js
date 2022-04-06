@@ -13,7 +13,8 @@ const UsuariosServicios = {
   },
   async findByEmail(email){
     try {
-      const usuario = await Usuario.findOne(email)
+      const usuario = await Usuario.findOne({email})
+      console.log("usuario",usuario)
       return usuario
     } catch (error) {
       return error

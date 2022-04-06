@@ -19,7 +19,7 @@ router.post('/user',
 );
 
 router.post('/card',
-  validateJWT,
+//   validateJWT,
   body('number').isString(),
   body('expYear').isString(),
   body('month').isString(),
@@ -28,7 +28,7 @@ router.post('/card',
 );
 
 router.post('/',
-  validateJWT,
+  // validateJWT,
   body('cardToken').isString(),
   body('docType').isString(),
   body('docNumber').isString(),

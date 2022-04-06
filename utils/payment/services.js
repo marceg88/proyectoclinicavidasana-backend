@@ -9,10 +9,11 @@ const epayco = require("epayco-sdk-node")({
   lang: "ES",
   test: true
 })
-
+console.log("epayco",epayco)
 const registerCard = async (card) => {
   try {
     const cardRegistered = await epayco.token.create(card)
+    console.log("cardRegistered",cardRegistered)
     if(!cardRegistered.status){
       res.status(503).json({
         message: cardRegistered.message,

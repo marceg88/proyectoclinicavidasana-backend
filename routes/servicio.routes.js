@@ -8,7 +8,7 @@ const validateJWT = passport.authenticate("jwt", {session: false, failWithError:
 
 router.get(
   "/:serviceId",
-  validateJWT,
+  // validateJWT,
   findServiceById
 )
 
